@@ -14,3 +14,11 @@ export const changeKeyword = (word) => ({
   type: actionsTypes.CHANGE_KEYWORD_FROM_THE_TIPS_LIST,
   payload: word,
 });
+
+export const showSuggestionList = () => ({
+  type: actionsTypes.SHOW_SUGGESTION_LIST,
+});
+
+export const hideSuggestionList = () => ({
+  type: actionsTypes.HIDE_SUGGESTION_LIST,
+});

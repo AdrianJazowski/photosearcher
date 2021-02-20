@@ -1,12 +1,12 @@
 /** @format */
 
-import { act } from "react-dom/test-utils";
 import { actionsTypes } from "../actions/actionsTypes";
 
 const initialState = {
   searchWord: "",
   filteredTipsOptions: [],
   arrayOfPhotos: [],
+  isSuggestionListVisible: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,11 +18,13 @@ const reducer = (state = initialState, action) => {
         ...state,
         searchWord: payload.newSearchedWord,
         filteredTipsOptions: payload.filteredArrayOptions,
+        isSuggestionListVisible: true,
       };
     case actionsTypes.DOWNLOAND_PHOTOS_FROM_API:
       return {
         ...state,
         arrayOfPhotos: payload,
+        isSuggestionListVisible: false,
       };
     case actionsTypes.CHANGE_KEYWORD_FROM_THE_TIPS_LIST:
       return {
