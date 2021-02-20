@@ -1,6 +1,6 @@
 /** @format */
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const OneTagWrapper = styled.ul`
   list-style: none;
@@ -8,8 +8,7 @@ export const OneTagWrapper = styled.ul`
   flex-direction: row;
 `;
 
-export const OneTagLi = styled.li`
-  /* min-width: 145px; */
+export const OneTagDiv = styled.div`
   color: grey;
   padding: 13px;
   font-size: 14px;
@@ -20,7 +19,6 @@ export const OneTagLi = styled.li`
   border-color: #d1d1d1;
   text-transform: capitalize;
   border-radius: 5px;
-  /* overflow: hidden; */
 
   &:hover {
     border-color: black;

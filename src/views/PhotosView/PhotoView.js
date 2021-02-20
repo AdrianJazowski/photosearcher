@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import CustomInput from "../../components/input/CustomInput";
 import KeywordList from "../../components/keywordList/KeywordList";
 import KeywordCarusel from "../../components/keywordsCarusel/KeywordCarusel";
-
 import AppContext from "../../context";
 import {
   PhotoViewWrapper,
@@ -49,10 +48,12 @@ const PhotoView = () => {
               />
               <OneTagWrapper>
                 {photo.tags.length > 0
-                  ? photo.tags.map((tag) => <OneTag>{tag.title}</OneTag>)
+                  ? photo.tags.map((tag) => (
+                      <OneTag key={tag.title}>{tag.title}</OneTag>
+                    ))
                   : arrayOfTags
                       .slice(0, 3)
-                      .map((tag) => <OneTag>{tag}</OneTag>)}
+                      .map((tag) => <OneTag key={tag.title}>{tag}</OneTag>)}
               </OneTagWrapper>
             </PhotoAndTagsWrapper>
           ))}

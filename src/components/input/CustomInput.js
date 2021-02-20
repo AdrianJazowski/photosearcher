@@ -2,7 +2,6 @@
 
 import React from "react";
 import { useContext } from "react";
-import { useSelector } from "react-redux";
 import AppContext from "../../context";
 import { BsSearchInput, InputWrapper, SearcherInput } from "./CustomInputSyles";
 
@@ -12,7 +11,6 @@ const CustomInput = ({ photoView }) => {
     handleChangeSearchWordAndArrayTips,
     handleDownloadPhotosFromApiSubmit,
   } = value;
-  const selectedSearchWord = useSelector((state) => state.searchWord);
 
   return (
     <>

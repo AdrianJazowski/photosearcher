@@ -5,7 +5,6 @@ import AppContext from "../../context";
 import { AiFillHeart, AiFillInfoCircle } from "react-icons/ai";
 import { BsPlus } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
-
 import { IoIosShareAlt } from "react-icons/io";
 import {
   IconsSpan,
@@ -15,12 +14,10 @@ import {
   ShareOrLocationSpan,
   UserNameDiv,
 } from "./CustomPopupStyles";
-import { useSelector } from "react-redux";
 
 const CustomPopup = () => {
   const value = useContext(AppContext);
-  const { handleClickOpen, handleSetPhoto, currentPhoto, openPopup } = value;
-  const selectedArrayOfPhotos = useSelector((state) => state.arrayOfPhotos);
+  const { handleClickOpen, currentPhoto, openPopup } = value;
 
   return (
     <>

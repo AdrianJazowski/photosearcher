@@ -1,6 +1,6 @@
 /** @format */
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const PhotoViewWrapper = styled.div`
   width: 70vw;
