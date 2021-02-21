@@ -2,32 +2,38 @@
 
 import React from "react";
 import { useContext } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { changeSearchInputByKeyWord } from "../../actions";
 import AppContext from "../../context";
 import { KeyWordListLi, KeyWordListUl } from "./KeywordListStyles";
 
 const KeywordList = ({ photoView }) => {
   const value = useContext(AppContext);
-  const {
-    handleDownloadPhotosFromApiSubmit,
-    handleChangeKeywordFromTheTipsList,
-  } = value;
+  const { handleGetPhotosFromApiSubmit } = value;
   const selectedFilteredTipsOptions = useSelector(
     (state) => state.filteredTipsOptions
   );
 
+  const dispatch = useDispatch();
+
+  const storeSearchInputValue = (word) => {
+    dispatch(changeSearchInputByKeyWord(word));
+    localStorage.setItem("searchInput", JSON.stringify(word));
+  };
   return (
     <>
-      <KeyWordListUl isPhotoView={photoView}>
+      <KeyWordListUl
+        onClick={handleGetPhotosFromApiSubmit}
+        isPhotoView={photoView}
+      >
         {selectedFilteredTipsOptions.length > 0
           ? selectedFilteredTipsOptions.slice(0, 5).map((word) => {
               return (
                 <KeyWordListLi
                   isPhotoView={photoView}
                   key={word}
-                  onClick={(e) => {
-                    handleChangeKeywordFromTheTipsList(e);
-                    handleDownloadPhotosFromApiSubmit(e);
+                  onClick={() => {
+                    storeSearchInputValue(word);
                   }}
                 >
                   {word}

@@ -27,8 +27,8 @@ const CustomPopup = () => {
             <ImgPopup src={currentPhoto.urls.small} />
             <UserNameDiv>
               {<img src={currentPhoto.user.profile_image.small} />}
-              <h1 name>{currentPhoto.user.name}</h1>
-              <p twittername>@{currentPhoto.user.twitter_username}</p>
+              <h1>{currentPhoto.user.name}</h1>
+              <p>@{currentPhoto.user.twitter_username}</p>
             </UserNameDiv>
             <IconsSpan righttop>
               <AiFillHeart />

@@ -7,18 +7,11 @@ export const changeSearchWord = (word) => ({
   payload: word,
 });
 export const changeArrayOfPhotos = (photos) => ({
-  type: actionsTypes.DOWNLOAND_PHOTOS_FROM_API,
+  type: actionsTypes.GET_PHOTOS_FROM_API,
   payload: photos,
 });
-export const changeKeyword = (word) => ({
-  type: actionsTypes.CHANGE_KEYWORD_FROM_THE_TIPS_LIST,
+
+export const changeSearchInputByKeyWord = (word) => ({
+  type: actionsTypes.CHANGE_INPUT,
   payload: word,
-});
-
-export const showSuggestionList = () => ({
-  type: actionsTypes.SHOW_SUGGESTION_LIST,
-});
-
-export const hideSuggestionList = () => ({
-  type: actionsTypes.HIDE_SUGGESTION_LIST,
 });

@@ -9,19 +9,19 @@ const CustomInput = ({ photoView }) => {
   const value = useContext(AppContext);
   const {
     handleChangeSearchWordAndArrayTips,
-    handleDownloadPhotosFromApiSubmit,
+    handleGetPhotosFromApiSubmit,
   } = value;
 
   return (
     <>
-      <form onSubmit={handleDownloadPhotosFromApiSubmit}>
+      <form onSubmit={handleGetPhotosFromApiSubmit}>
         <InputWrapper isPhotoView={photoView}>
           <BsSearchInput />
 
           <SearcherInput
             onChange={handleChangeSearchWordAndArrayTips}
             type="text"
-            name="photo"
+            name="searchPhoto"
             placeholder="type flower..."
             autoComplete="off"
             isPhotoView={photoView}

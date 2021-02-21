@@ -14,7 +14,6 @@ export const KeyWordListUl = styled.ul`
   list-style: none;
   z-index: 100;
   color: black;
-  
 
   ${({ isPhotoView }) =>
     isPhotoView &&
@@ -23,6 +22,11 @@ export const KeyWordListUl = styled.ul`
       top: 40px;
       width: 40%;
       align-self: center;
+
+      @media screen and (max-width: 1025px) {
+        width: 60%;
+        font-size: 24px;
+      }
     `}
 `;
 export const KeyWordListLi = styled.li`

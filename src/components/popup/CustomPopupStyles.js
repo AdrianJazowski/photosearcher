@@ -20,6 +20,7 @@ export const PopupDiv = styled.div`
 
 export const ImgPopup = styled.img`
   align-self: center;
+  cursor: pointer;
 `;
 
 export const IconsSpan = styled.span`

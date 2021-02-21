@@ -5,22 +5,15 @@ import React, { useState } from "react";
 import { apiKey } from "./api/apiKey";
 import { formatedAutoCompleteData } from "./utils/formatedAutoCompleteData";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  changeArrayOfPhotos,
-  changeKeyword,
-  changeSearchWord,
-} from "./actions";
+import { changeArrayOfPhotos, changeSearchWord } from "./actions";
 import GlobalStyles from "./globalStyles/GlobalStyles";
 import Router from "./routing/Router";
 import AppContext from "./context";
-import store from "./store";
-import { saveStoreState } from "./util/localStorage";
 
 const App = () => {
   const [openPopup, setOpenPopup] = useState(false);
   const [currentPhoto, setCurrentPhoto] = useState(null);
   const [showRedirect, setShowRedirect] = useState(false);
-  const selectedSearchWord = useSelector((state) => state.searchWord);
   const dispatch = useDispatch();
   const selectedArrayOfPhotos = useSelector((state) => state.arrayOfPhotos);
 
@@ -51,32 +44,43 @@ const App = () => {
       filteredArrayOptions,
     };
     dispatch(changeSearchWord(newValueFromInput));
+    localStorage.setItem("searchInput", JSON.stringify(newSearchedWord));
   };
 
-  const handleDownloadPhotosFromApiSubmit = (e) => {
-    e.preventDefault();
+  const handleGetPhotosFromApiSubmit = (e) => {
+    let valueToApiCall;
 
-    const url = `https://api.unsplash.com/search/photos?page=1&query=${selectedSearchWord}&client_id=${apiKey}`;
+    if (e.target.matches("form")) {
+      e.preventDefault();
+      valueToApiCall = e.target.searchPhoto.value;
+    } else {
+      valueToApiCall = e.target.innerText;
+    }
+
+    const url = `https://api.unsplash.com/search/photos?page=1&query=${valueToApiCall}&client_id=${apiKey}`;
 
     axios
       .get(url)
       .then((response) => {
         const newPhotoArray = response.data.results;
+        const newPhotoAndKeyWord = {
+          newPhotoArray,
+          valueToApiCall,
+        };
 
-        dispatch(changeArrayOfPhotos(newPhotoArray));
+        dispatch(changeArrayOfPhotos(newPhotoAndKeyWord));
+        localStorage.setItem("photos", JSON.stringify(newPhotoArray));
+        localStorage.setItem("searchKeyword", JSON.stringify(valueToApiCall));
       })
       .then(() => setShowRedirect(true))
+      .then(
+        () =>
+          (window.location.pathname = `/photos/${valueToApiCall.replace(
+            /\s/g,
+            ""
+          )}`)
+      )
       .catch((err) => console.log(err));
-
-    // saveStoreState(store.getState());
-  };
-
-  const handleChangeKeywordFromTheTipsList = (e) => {
-    const inputValue = {
-      searchWord: e.target.innerText,
-      selectedFilteredTipsOptions: [],
-    };
-    dispatch(changeKeyword(inputValue));
   };
 
   return (
@@ -84,8 +88,7 @@ const App = () => {
       <AppContext.Provider
         value={{
           handleChangeSearchWordAndArrayTips,
-          handleDownloadPhotosFromApiSubmit,
-          handleChangeKeywordFromTheTipsList,
+          handleGetPhotosFromApiSubmit,
           showRedirect,
           openPopup,
           handleClickOpen,

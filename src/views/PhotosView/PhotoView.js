@@ -14,12 +14,14 @@ import {
   PhotoAndTagsWrapper,
   OneTagWrapper,
   OneTag,
+  Photo,
 } from "./PhotoViewStyles";
 import CustomPopup from "../../components/popup/CustomPopup";
 
 const PhotoView = () => {
   const selectedArrayOfPhotos = useSelector((state) => state.arrayOfPhotos);
   const selectedSearchWord = useSelector((state) => state.searchWord);
+  const selectedTemporaryWord = useSelector((state) => state.temporaryWord);
   const selectedIsSuggestionListVisible = useSelector(
     (state) => state.isSuggestionListVisible
   );
@@ -34,18 +36,17 @@ const PhotoView = () => {
           {selectedSearchWord.length >= 3 && selectedIsSuggestionListVisible ? (
             <KeywordList photoView />
           ) : null}
-          <PhotoViewKeyword>{selectedSearchWord}</PhotoViewKeyword>
+          <PhotoViewKeyword>{selectedTemporaryWord}</PhotoViewKeyword>
           <KeywordCarusel />
         </PhotoViewSearcherWrapper>
 
         <PhotoViewGridForPhotos>
           {selectedArrayOfPhotos.map((photo) => (
-            <PhotoAndTagsWrapper onClick={() => handleSetPhoto(photo)}>
-              <img
-                onClick={handleClickOpen}
-                key={photo.id}
-                src={photo.urls.small}
-              />
+            <PhotoAndTagsWrapper
+              key={photo.id}
+              onClick={() => handleSetPhoto(photo)}
+            >
+              <Photo onClick={handleClickOpen} src={photo.urls.small} />
               <OneTagWrapper>
                 {photo.tags.length > 0
                   ? photo.tags.map((tag) => (
@@ -53,7 +54,7 @@ const PhotoView = () => {
                     ))
                   : arrayOfTags
                       .slice(0, 3)
-                      .map((tag) => <OneTag key={tag.title}>{tag}</OneTag>)}
+                      .map((tag) => <OneTag key={tag}>{tag}</OneTag>)}
               </OneTagWrapper>
             </PhotoAndTagsWrapper>
           ))}

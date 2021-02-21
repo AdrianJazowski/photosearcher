@@ -1,12 +1,18 @@
 /** @format */
 
 import { actionsTypes } from "../actions/actionsTypes";
+import {
+  getPhotosFromLocalStorage,
+  getSearchInputFormLocalStorage,
+  getSearchKeywordFromLocalStorage,
+} from "../utils/localStorageGetter";
 
 const initialState = {
-  searchWord: "",
+  searchWord: getSearchInputFormLocalStorage(),
   filteredTipsOptions: [],
-  arrayOfPhotos: [],
+  arrayOfPhotos: getPhotosFromLocalStorage(),
   isSuggestionListVisible: false,
+  temporaryWord: getSearchKeywordFromLocalStorage(),
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,18 +26,20 @@ const reducer = (state = initialState, action) => {
         filteredTipsOptions: payload.filteredArrayOptions,
         isSuggestionListVisible: true,
       };
-    case actionsTypes.DOWNLOAND_PHOTOS_FROM_API:
+    case actionsTypes.GET_PHOTOS_FROM_API:
       return {
         ...state,
-        arrayOfPhotos: payload,
+        temporaryWord: payload.valueToApiCall,
+        arrayOfPhotos: payload.newPhotoArray,
         isSuggestionListVisible: false,
       };
-    case actionsTypes.CHANGE_KEYWORD_FROM_THE_TIPS_LIST:
+
+    case actionsTypes.CHANGE_INPUT:
       return {
         ...state,
-        searchWord: payload.searchWord,
-        filteredTipsOptions: payload.selectedFilteredTipsOptions,
+        searchWord: payload,
       };
+
     default:
       return state;
   }

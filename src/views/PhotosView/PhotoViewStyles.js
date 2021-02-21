@@ -16,11 +16,23 @@ export const PhotoViewGridForPhotos = styled.div`
   column-count: 3;
   line-height: 0;
   padding: 100px 0;
+  @media screen and (max-width: 1025px) {
+    column-count: 2;
+  }
+
+  @media screen and (max-width: 420px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const PhotoAndTagsWrapper = styled.div`
   width: 100%;
   height: 100%;
+`;
+
+export const Photo = styled.img`
+  cursor: pointer;
 `;
 
 export const OneTag = styled.p`
@@ -29,6 +41,12 @@ export const OneTag = styled.p`
   padding: 15px;
   color: rgb(58, 58, 58);
   background-color: rgba(206, 206, 206, 0.45);
+  @media screen and (max-width: 1025px) {
+    font-size: 32px;
+  }
+  @media screen and (max-width: 420px) {
+    font-size: 24px;
+  }
 `;
 export const OneTagWrapper = styled.div`
   display: flex;
@@ -48,4 +66,7 @@ export const PhotoViewKeyword = styled.h2`
   font-size: 46px;
   text-align: left;
   text-transform: capitalize;
+  @media screen and (max-width: 420px) {
+    align-self: center;
+  }
 `;

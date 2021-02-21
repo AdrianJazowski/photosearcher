@@ -21,6 +21,15 @@ export const InputWrapper = styled.div`
       border: 1px solid transparent;
       margin: auto;
     `}
+  @media screen and (max-width: 1025px) {
+    font-size: 36px;
+    width: 100%;
+    height: 60px;
+  }
+
+  @media screen and (max-width: 420px) {
+    width: 100%;
+  }
 `;
 export const SearcherInput = styled.input`
   border: none;
@@ -29,6 +38,7 @@ export const SearcherInput = styled.input`
   border: 1px solid #d1d1d1;
   box-shadow: 0 2px 4px rgb(0 0 0 / 12%);
   border-radius: 4px;
+  outline: none;
   ${({ isPhotoView }) =>
     isPhotoView &&
     css`
@@ -36,6 +46,9 @@ export const SearcherInput = styled.input`
       box-shadow: none;
       border: none;
       background: transparent;
+      @media screen and (max-width: 1025px) {
+        font-size: 28px;
+      }
     `}
 `;
 export const BsSearchInput = styled(BsSearch)`
