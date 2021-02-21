@@ -1,6 +1,6 @@
 <!-- @format -->
 
-# Photo search engime
+# Photo search engine
 
 ## Overview:
 
